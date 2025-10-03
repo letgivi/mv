@@ -1,16 +1,25 @@
-function ScaleSlider() {
-  var slider = jssor_slider1; // slider đã khởi tạo
-  var container = document.getElementById("slider1_container");
-
-  if (window.innerWidth <= 768) {
-    container.style.height = "320px";
-    slider.$ScaleWidth(container.clientWidth);
-  } else {
-    container.style.height = "320px"; // vẫn giữ 320px trên PC
-    slider.$ScaleWidth(820); 
+  var jssor_slider1;
+  function jssor_slider1_starter(containerId) {
+    var options = {
+      $AutoPlay: 1,
+      $SlideDuration: 500,
+      $DragOrientation: 3
+    };
+    jssor_slider1 = new $JssorSlider$(containerId, options);
   }
-}
 
-// khi load và resize
-window.addEventListener("load", ScaleSlider);
-window.addEventListener("resize", ScaleSlider);
+  jssor_slider1_starter("slider1_container");
+
+  function ScaleSlider() {
+    var container = document.getElementById("slider1_container");
+    if (window.innerWidth <= 768) {
+      container.style.height = "320px"; // mobile: cao 320px
+      jssor_slider1.$ScaleWidth(container.clientWidth); 
+    } else {
+      container.style.height = "320px"; // PC vẫn cao 320px
+      jssor_slider1.$ScaleWidth(820); 
+    }
+  }
+
+  window.addEventListener("load", ScaleSlider);
+  window.addEventListener("resize", ScaleSlider);
